@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import hola, miNombreEs, mi_template
+from . import views
+# from .views import hola, miNombreEs, mi_template, tu_template
 
 urlpatterns = [  
-    path('mi-template/', mi_template),             
-    path('miNombreEs/<nombre>', miNombreEs),
-    path('hola/', hola),
+    path('crear-persona/<str:nombre>/<str:apellido>/', views.crear_persona),            
+    path('ver-personas/', views.ver_personas),           
+    # path('mi-template/', mi_template),
+    # path('mi-template/<str:nombre>', tu_template),                 
+    # path('miNombreEs/<nombre>', miNombreEs),
+    # path('hola/', hola),
     path('admin/', admin.site.urls),
 ]
