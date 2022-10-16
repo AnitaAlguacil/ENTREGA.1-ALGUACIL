@@ -55,7 +55,7 @@ ROOT_URLCONF = 'entregaAlguacil.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ r'C:\Users\analu\OneDrive\Documentos\ENTREGA.1-ALGUACIL\entregaAlguacil\templates', 'r'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
