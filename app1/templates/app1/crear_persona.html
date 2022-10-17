@@ -1,14 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <p>La persona se creo </p>
+{% extends 'app1/base.html' %} 
 
-</body>
-</html>
+{% block  title_pagina%}
+<title>Crear Persona</title>
+{% endblock title_pagina %}
+
+
+{% block mi_contenido  %}
+<form action={% url 'crear_persona' %} method="POST">
+    {% csrf_token %}
+    <p>
+        Nombre:
+        <input type="text" name="nombre"placeholder="Nombre">
+    </p>
+    <p>
+        <label for="">Apellido:</label>
+        <input type="text" name="apellido" placeholder="Apellido">
+        
+    </p>
+    {% comment %} <input type="button" value="Crear"> {% endcomment %}
+    {% comment %} <input type="submit" value="Crear"> {% endcomment %}
+    <button>Crear</button>    
+</form> 
+{% endblock mi_contenido %} 
+

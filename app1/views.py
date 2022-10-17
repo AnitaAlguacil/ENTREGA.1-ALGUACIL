@@ -3,7 +3,7 @@ from datetime import datetime
 import random
 from django.http import HttpResponse
 from django.template import Context, Template, loader
-from django.shortcuts import render 
+from django.shortcuts import render, redirect
 
 import random
 
@@ -41,13 +41,17 @@ def mi_template(request):
 #     return HttpResponse(template_renderizado)
 
 
-def crear_persona(request,nombre,apellido):
+def crear_persona(request):
     
-    persona = Persona(nombre=nombre, apellido=apellido, edad=random.randrange(1, 99), fecha_nacimiento= datetime.now())
-    
-    persona.save()    
-      
-    return render(request, 'app1/crear_persona.html', {'persona':persona} )
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        apellido = request.POST.get('apellido')
+        persona = Persona(nombre=nombre, apellido=apellido, edad=random.randrange(1, 99), fecha_creacion= datetime.now())
+        persona.save()  
+        
+        return redirect('ver_personas')
+             
+    return render(request, 'app1/crear_persona.html', {})
 
  
 
