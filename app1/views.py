@@ -11,24 +11,24 @@ from app1.models import Persona
 
 
 
-# def hola (request):
-#     return HttpResponse('<h1> Esto es nuevo</h1>')
+def hola (request):
+    return HttpResponse('<h1> Esto es nuevo</h1> ')
 
-# def miNombreEs (request, nombre):
-#     documentoDeTexto = f"Mi nombre es: <br><br> {nombre}"
+def fecha (request):
+    fecha_actual =  datetime.now()
     
-#     return HttpResponse(documentoDeTexto)
+    return HttpResponse(f'La fecha actual es {fecha_actual}')
 
-# def mi_template(request):
-#     cargar_archivo = open (r'C:\Users\analu\OneDrive\Documentos\ENTREGA.1-ALGUACIL\entregaAlguacil\templates\template1.html', 'r')
-#     template = Template (cargar_archivo.read())
-#     cargar_archivo.close()
+def mi_template(request):
+    cargar_archivo = open (r'C:\Users\analu\OneDrive\Documentos\ENTREGA.1-ALGUACIL\entregaAlguacil\templates\template1.html', 'r')
+    template = Template (cargar_archivo.read())
+    cargar_archivo.close()
     
-#     contexto = Context()
-#     template_renderizado = template.render(contexto)
+    contexto = Context()
+    template_renderizado = template.render(contexto)
     
     
-#     return HttpResponse(template_renderizado)
+    return HttpResponse(template_renderizado)
 
 
 
