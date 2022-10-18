@@ -1,0 +1,19 @@
+{% extends 'app1/index.html' %}
+
+{% block  title_pagina%}
+<title>About</title>
+{% endblock title_pagina %}
+
+{% block h1_texto_header %}
+About
+{% endblock h1_texto_header %}
+
+{% block index_contenido  %}
+<a class="navbar-brand" href={% url 'about'%}>About</a>
+<p>Listado de personas: 
+
+    Soy Ana Lucia Alguacil, arquitecta aplicando python.
+
+</p>
+    
+{% endblock index_contenido %}

@@ -6,6 +6,7 @@ from django.template import Context, Template, loader
 from django.shortcuts import render, redirect
 
 import random
+from app1.forms import PersonaFormulario, BusquedaPersonaFormulario
 
 from app1.models import Persona
 
@@ -44,23 +45,48 @@ def mi_template(request):
 def crear_persona(request):
     
     if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        persona = Persona(nombre=nombre, apellido=apellido, edad=random.randrange(1, 99), fecha_creacion= datetime.now())
-        persona.save()  
         
-        return redirect('ver_personas')
+        formulario = PersonaFormulario(request.POST) 
+        
+        if formulario.is_valid():  
+            data = formulario.cleaned_data      
+        
+            nombre = data ['nombre']
+            apellido = data ['apellido']
+            edad = data ['edad']
+            fecha_creacion = data.get('fecha_creacion', datetime.now())
+            
+            persona = Persona(nombre=nombre, apellido=apellido, edad=edad, fecha_creacion= fecha_creacion)
+            persona.save()  
+        
+            return redirect('ver_personas')
+    
+    formulario = PersonaFormulario()
              
-    return render(request, 'app1/crear_persona.html', {})
+    return render(request, 'app1/crear_persona.html', {'formulario' : formulario})
 
  
 
 def ver_personas(request):
     
-    personas = Persona.objects.all()    
+    nombre =request.GET.get('nombre')
     
-    return render(request, 'app1/ver_personas.html', {'personas':personas} )
+    if nombre: 
+        personas = Persona.objets.filter(nombre__icontains=nombre)
+    else:
+        personas = Persona.objects.all()        
+    
+      
+    formulario = BusquedaPersonaFormulario()  
+    
+    return render(request, 'app1/ver_personas.html', {'personas': personas, 'Formulario': formulario})
+
 
 def index (request):
     
     return render (request, 'app1/index.html' )
+
+
+def about (request):
+    
+    return render (request, 'app1/about.html' )
