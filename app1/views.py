@@ -54,7 +54,9 @@ def crear_persona(request):
             nombre = data ['nombre']
             apellido = data ['apellido']
             edad = data ['edad']
-            fecha_creacion = data.get('fecha_creacion', datetime.now())
+            fecha_creacion = data['fecha_creacion']
+            if not fecha_creacion:
+                fecha_creacion = datetime.now()
             
             persona = Persona(nombre=nombre, apellido=apellido, edad=edad, fecha_creacion= fecha_creacion)
             persona.save()  
@@ -72,14 +74,14 @@ def ver_personas(request):
     nombre =request.GET.get('nombre')
     
     if nombre: 
-        personas = Persona.objets.filter(nombre__icontains=nombre)
+        personas = Persona.objects.filter(nombre__icontains=nombre)
     else:
         personas = Persona.objects.all()        
     
       
     formulario = BusquedaPersonaFormulario()  
     
-    return render(request, 'app1/ver_personas.html', {'personas': personas, 'Formulario': formulario})
+    return render(request, 'app1/ver_personas.html', {'personas': personas, 'formulario': formulario})
 
 
 def index (request):
