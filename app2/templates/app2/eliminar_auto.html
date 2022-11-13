@@ -1,15 +1,15 @@
 {% extends 'app1/base.html' %} 
 
 {% block  title_pagina%}
-<title>Eliminar Mascota</title>
+<title>Eliminar Auto</title>
 {% endblock title_pagina %}
 
 
 {% block mi_contenido  %}
-<form action={% url 'eliminar_mascota' mascota.id %} method="POST">
+<form action={% url 'eliminar_auto' auto.id %} method="POST">
     {% csrf_token %}
    <p>
-      Confirma el borrado de la mascota {{mascota}}?
+      Confirma el borrado del auto {{auto}}?
    </p>
     <button>Confirmar</button>    
 </form> 

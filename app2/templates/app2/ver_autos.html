@@ -2,25 +2,25 @@
 {% extends 'app1/base.html' %}
 
 {% block  title_pagina%}
-<title>Ver Mascotas </title>
+<title>Ver Autos </title>
 {% endblock title_pagina %}
 
 {% block mi_contenido  %}
-<a class="navbar-brand" href={% url 'crear_mascota'%}>Crear Mascota</a>
-<p>Listado de Mascotas: </p>
+<a class="navbar-brand" href={% url 'crear_auto'%}>Crear Auto</a>
+<p>Listado de Autos: </p>
 
     {% comment %} <form action={% url 'ver_mascotas' %} method="GET">   
         {{formulario}}
         <button>Buscar</button>    
     </form>  {% endcomment %}
 <p>
-    {% if object_list %}
+    {% if Autos %}
 
-        {% for mascota in object_list  %}
+        {% for auto in autos  %}
             <li> 
-                {{mascota}}               
-                <a href={% url 'editar_mascota' mascota.id %}>Editar</a>
-                <a href={% url 'eliminar_mascota' mascota.id %}>Eliminar</a>             
+                {{auto}}               
+                <a href={% url 'editar_auto' auto.id %}>Editar</a>
+                <a href={% url 'eliminar_auto' auto.id %}>Eliminar</a>             
             <li>
         {% endfor %}
 
