@@ -9,7 +9,7 @@
 <form action={% url 'crear_mascota' %} method="POST">
     {% csrf_token %}
     <table>
-            {{formulario}}
+            {{form}}
     </table>
     <button>Crear</button>    
 </form> 

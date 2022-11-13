@@ -9,10 +9,10 @@
 <a class="navbar-brand" href={% url 'crear_mascota'%}>Crear Mascota</a>
 <p>Listado de Mascotas: </p>
 
-    {% comment %} <form action={% url 'ver_mascotas' %} method="GET">   
+    <form action={% url 'ver_mascotas' %} method="GET">   
         {{formulario}}
         <button>Buscar</button>    
-    </form>  {% endcomment %}
+    </form>  
 <p>
     {% if mascotas %}
 

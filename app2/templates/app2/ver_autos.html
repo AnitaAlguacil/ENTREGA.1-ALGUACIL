@@ -2,32 +2,31 @@
 {% extends 'app1/base.html' %}
 
 {% block  title_pagina%}
-<title>Ver Autos </title>
+<title>Ver Autos</title>
 {% endblock title_pagina %}
 
 {% block mi_contenido  %}
 <a class="navbar-brand" href={% url 'crear_auto'%}>Crear Auto</a>
 <p>Listado de Autos: </p>
 
-    {% comment %} <form action={% url 'ver_mascotas' %} method="GET">   
+    <form action={% url 'ver_autos' %} method="GET">   
         {{formulario}}
         <button>Buscar</button>    
-    </form>  {% endcomment %}
+    </form>  
 <p>
-    {% if Autos %}
+    {% if objects_list  %}
 
-        {% for auto in autos  %}
-            <li> 
-                {{auto}}               
-                <a href={% url 'editar_auto' auto.id %}>Editar</a>
-                <a href={% url 'eliminar_auto' auto.id %}>Eliminar</a>             
-            <li>
-        {% endfor %}
-
+        {% for auto in objects_list  %}
+        <li>                        
+            <a href={% url 'ver_autos' auto.id %}>{{auto}}</a>
+            <a href={% url 'editar_auto' auto.id %}>Editar</a>
+            <a href={% url 'eliminar_auto' auto.id %}>Eliminar</a>             
+        <li>
+            {% endfor %}
     {%else %}
         <p> No se encontraron resultados.<p>
-    {% endif %}
-
+    {%endif%}    
+    
 </p>
 {% endblock mi_contenido %}
 

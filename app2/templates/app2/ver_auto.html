@@ -1,0 +1,19 @@
+
+{% extends 'app1/base.html' %}
+
+{% block  title_pagina%}
+<title>Auto</title>
+{% endblock title_pagina %}
+
+{% block mi_contenido  %}
+<p>
+    <li> Modelo: {{auto.modelo}} </li>  
+    <li> Marca: {{auto.marca}} </li>
+    <li> Can. Puertas: {{auto.cant_puertas}} </li>
+    <li> Color: {{auto.color}} </li>
+    <li> Chasis: {{auto.chasis}} </li>
+    <li> Descripcion: {{auto.descriptcion | safe}} </li>   
+    
+       
+</p>
+{% endblock mi_contenido %}
