@@ -1,7 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-# Create your models here.
 
 class Mascota (models.Model):
     nombre = models.CharField (max_length=20)

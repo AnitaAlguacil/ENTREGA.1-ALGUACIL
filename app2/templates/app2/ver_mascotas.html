@@ -1,5 +1,4 @@
-
-{% extends 'app1/base.html' %}
+{% extends 'inicio/base.html' %}
 
 {% block  title_pagina%}
 <title>Ver Mascotas </title>
@@ -9,16 +8,16 @@
 <a class="navbar-brand" href={% url 'crear_mascota'%}>Crear Mascota</a>
 <p>Listado de Mascotas: </p>
 
-    <form action={% url 'ver_mascotas' %} method="GET">   
+    {% comment %} <form action={% url 'ver_mascotas' %} method="GET">   
         {{formulario}}
         <button>Buscar</button>    
-    </form>  
+    </form>   {% endcomment %}
 <p>
     {% if mascotas %}
 
         {% for mascota in mascotas  %}
             <li> 
-                {{mascota}}               
+                <u>Nombre:</u> {{mascota.nombre}} - <u>Tipo:</u>{{mascota.tipo}} - <u>Edad:</u>{{mascota.edad}} 
                 <a href={% url 'editar_mascota' mascota.id %}>Editar</a>
                 <a href={% url 'eliminar_mascota' mascota.id %}>Eliminar</a>             
             <li>

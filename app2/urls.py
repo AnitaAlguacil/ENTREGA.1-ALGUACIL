@@ -8,7 +8,7 @@ urlpatterns = [
     path('mascotas/eliminar/<int:id>', views.eliminar_mascota, name='eliminar_mascota'),
     
     
-    path('autos/', views.ListaAutos.as_view(), name='ver_autos'),
+    path('autos/', views.ver_autos, name='ver_autos'),
     path('autos/crear/', views.CrearAuto.as_view(), name='crear_auto'),
     path('autos/editar/<int:pk>', views.EditarAuto.as_view(), name='editar_auto'),
     path('autos/eliminar/<int:pk>', views.EliminarAuto.as_view(), name='eliminar_auto'),  

@@ -7,6 +7,9 @@ class MascotaFormulario(forms.Form):
     edad = forms.IntegerField()
     fecha_nacimiento = forms.DateField()
     
+class BusquedaMascotas(forms.Form):
+    mascotas = forms.CharField(max_length=20, required=False)
+    
 
 class Auto (forms.Form):
     modelo = forms.CharField (max_length=20)
@@ -18,4 +21,6 @@ class Auto (forms.Form):
     
 class BusquedaAutos(forms.Form):
     chasis = forms.CharField(max_length=20, required=False)
+    
+
     

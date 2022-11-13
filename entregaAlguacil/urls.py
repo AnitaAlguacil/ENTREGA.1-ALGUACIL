@@ -26,7 +26,7 @@ urlpatterns = [
     # path('miNombreEs/<nombre>', miNombreEs),
     # path('hola/', hola),
     # path ('app1/', include('app1.urls')),
-    path ('', include('app1.urls')),
+    path ('', include('inicio.urls')),
     path ('app2/', include('app2.urls')),  
     path ('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),

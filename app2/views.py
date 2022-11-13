@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
-from app2.forms import MascotaFormulario, BusquedaAutos
+from app2.forms import MascotaFormulario, BusquedaAutos, BusquedaMascotas
 from app2.models import Mascota, Auto
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,36 +10,44 @@ from django.contrib.auth.decorators import login_required
 
 
 def ver_mascotas(request):
+    mascota =request.GET.get('mascota')
     
-    mascotas = Mascota.objects.all()
+    if mascota: 
+        mascotas = Mascota.objects.filter(mascota__icontains=mascota)
+    else:
+        mascotas = Mascota.objects.all()        
     
-    return render(request, 'app2/ver_mascotas.html', {'mascotas': mascotas})
+      
+    formulario = BusquedaMascotas()  
+    
+    return render(request, 'app2/ver_mascotas.html', {'mascotas': mascotas, 'formulario': formulario})
+    
+    
 
 @login_required
 def crear_mascota (request):
     
     if request.method == 'POST':
-        formulario = MascotaFormulario(request.POST)
         
-        if formulario.is_valid():
-           datos = formulario.cleaned_data
-           
-           mascota = Mascota(
-               nombre=datos['nombre'],
-               tipo=datos['tipo'], 
-               edad = datos ['edad'], 
-               fecha_nacimiento = datos ['fecha_nacimiento']
-            )
-           mascota.save()
-           return redirect ('ver_mascotas')
+        formulario = MascotaFormulario(request.POST) 
+        
+        if formulario.is_valid():  
+            data = formulario.cleaned_data      
+        
+            nombre = data ['nombre']
+            tipo = data ['tipo']
+            edad = data ['edad']
+            fecha_nacimiento = data['fecha_nacimiento']
+            
+            
+            mascota = Mascota(nombre=nombre, tipo=tipo, edad=edad, fecha_nacimiento= fecha_nacimiento)
+            mascota.save()  
+        
+            return redirect('ver_mascotas')
     
-        else:
-            return render(request, 'app2/crear_mascota.html',{'formulario': formulario})
-     
-          
     formulario = MascotaFormulario()
-    
-    return render(request, 'app2/crear_mascota.html',{'formulario': formulario})
+             
+    return render(request, 'app2/crear_mascota.html', {'formulario' : formulario})
 
 
 @login_required
@@ -86,25 +94,27 @@ def eliminar_mascota(request, id):
     return redirect('ver_mascotas')
 
 
+def ver_autos(request):
+    
+    auto =request.GET.get('auto')
+    
+    if auto: 
+        autos = Auto.objects.filter(auto__icontains=auto)
+    else:
+        autos = Auto.objects.all()        
+    
+      
+    formulario = BusquedaAutos()  
+    
+    return render(request, 'app2/ver_autos.html', {'autos': autos, 'formulario': formulario})
 
 
-class ListaAutos(ListView):
-    model = Auto
-    template_name = 'app2/ver_autos.html'
+def index (request):
     
-    def get_queryset(self):
-        chasis = self.request.GET.get('chasis', '')
-        if chasis:
-            object_list = self.model.objects.filter(chasis__icontains=chasis)
-        else:
-            object_list = self.model.objects.all()
-        return object_list
-    
-    def get_context_data(self, **kwargs):
-        context= super().get_context_data(**kwargs)
-        context["formulario"] = BusquedaAutos()
-        return context
-   
+    return render (request, 'app1/index.html' )
+
+
+ 
 class CrearAuto(LoginRequiredMixin,CreateView):
     model = Auto
     success_url = '/app2/autos/'

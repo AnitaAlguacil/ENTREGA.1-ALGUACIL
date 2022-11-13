@@ -4,44 +4,16 @@ import random
 from django.http import HttpResponse
 from django.template import Context, Template, loader
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 import random
-from app1.forms import PersonaFormulario, BusquedaPersonaFormulario
+from inicio.forms import PersonaFormulario, BusquedaPersonaFormulario
 
-from app1.models import Persona
-
-
-
-def hola (request):
-    return HttpResponse('<h1> Esto es nuevo</h1> ')
-
-def fecha (request):
-    fecha_actual =  datetime.now()
-    
-    return HttpResponse(f'La fecha actual es {fecha_actual}')
-
-def mi_template(request):
-    cargar_archivo = open (r'C:\Users\analu\OneDrive\Documentos\ENTREGA.1-ALGUACIL\entregaAlguacil\templates\template1.html', 'r')
-    template = Template (cargar_archivo.read())
-    cargar_archivo.close()
-    
-    contexto = Context()
-    template_renderizado = template.render(contexto)
-    
-    
-    return HttpResponse(template_renderizado)
+from inicio.models import Persona
 
 
 
-# def tu_template(request, nombre):    
-   
-#     template = loader.get_template('tu_template.html')
-#     template_renderizado = template.render({'persona':nombre})
-    
-    
-#     return HttpResponse(template_renderizado)
-
-
+@login_required
 def crear_persona(request):
     
     if request.method == 'POST':
@@ -65,7 +37,7 @@ def crear_persona(request):
     
     formulario = PersonaFormulario()
              
-    return render(request, 'app1/crear_persona.html', {'formulario' : formulario})
+    return render(request, 'inicio/crear_persona.html', {'formulario' : formulario})
 
  
 
@@ -81,14 +53,14 @@ def ver_personas(request):
       
     formulario = BusquedaPersonaFormulario()  
     
-    return render(request, 'app1/ver_personas.html', {'personas': personas, 'formulario': formulario})
+    return render(request,'inicio/ver_personas.html',{'personas': personas, 'formulario': formulario})
 
 
 def index (request):
     
-    return render (request, 'app1/index.html' )
+    return render (request,'inicio/index.html' )
 
 
 def about (request):
     
-    return render (request, 'app1/about.html' )
+    return render (request,'inicio/about.html' )

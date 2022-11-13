@@ -1,11 +1,15 @@
 
-{% extends 'app1/base.html' %}
+{% extends 'inicio/index.html' %}
 
 {% block  title_pagina%}
 <title>Ver Autos</title>
 {% endblock title_pagina %}
 
-{% block mi_contenido  %}
+{% block h1_texto_header %}
+Ver Autos
+{% endblock h1_texto_header %}
+
+{% block index_contenido  %}
 <a class="navbar-brand" href={% url 'crear_auto'%}>Crear Auto</a>
 <p>Listado de Autos: </p>
 
@@ -14,11 +18,11 @@
         <button>Buscar</button>    
     </form>  
 <p>
-    {% if objects_list  %}
+    {% if autos  %}
 
-        {% for auto in objects_list  %}
+        {% for auto in autos  %}
         <li>                        
-            <a href={% url 'ver_autos' auto.id %}>{{auto}}</a>
+            <u>Modelo:</u> {{auto.modelo}} - <u>Marca:</u>{{auto.marca}} - <u>Color:</u>{{auto.color}} - <u>Chasis:</u>{{auto.chasis}}
             <a href={% url 'editar_auto' auto.id %}>Editar</a>
             <a href={% url 'eliminar_auto' auto.id %}>Eliminar</a>             
         <li>
@@ -28,6 +32,6 @@
     {%endif%}    
     
 </p>
-{% endblock mi_contenido %}
+{% endblock index_contenido %}
 
    

@@ -1,0 +1,34 @@
+{% extends 'inicio/base.html' %}
+
+{% block  title_pagina%}
+<title>Ver Personas</title>
+{% endblock title_pagina %}
+
+{% block h1_texto_header %}
+Ver Personas
+{% endblock h1_texto_header %}
+
+{% block mi_contenido  %}
+<a class="navbar-brand" href={% url 'crear_persona'%}>Crear Personas</a>
+<p>Listado de Personas: </p>
+
+    <form action={% url 'ver_personas' %} method="GET">   
+        {{formulario}}
+        <button>Buscar</button>    
+    </form>  
+<p>
+    {% if personas  %}
+
+        {% for persona in personas  %}
+        <li>                        
+            <u>Nombre y Apellido:</u> {{persona.nombre}} {{persona.apellido}}<u>Edad:</u>{{persona.edad}} 
+            {% endfor %}
+    {%else %}
+        <p> No se encontraron resultados.<p>
+    {%endif%}    
+    
+</p>
+{% endblock mi_contenido %}
+
+   
+ 
